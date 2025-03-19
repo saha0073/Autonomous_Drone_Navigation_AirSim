@@ -1,0 +1,30 @@
+{
+  "SettingsVersion": 1.2,
+  "SimMode": "Multirotor",
+  "LogMessagesVisible": false,
+  "ViewMode": "FlyWithMe",
+  "Vehicles": {
+      "Drone1": {
+          "VehicleType": "SimpleFlight",
+          "X": 0, "Y": 0, "Z": -2,
+          "Yaw": 0,
+          "DefaultVehicleState": "Armed",
+          "EnableCollisionPassthrough": false,
+          "AllowAPIAlways": true,
+          "EnableRPC": true,
+          "Sensors": {
+              "Lidar1": {
+                  "SensorType": 6,
+                  "Enabled": true,
+                  "NumberOfChannels": 16,
+                  "Range": 10,
+                  "PointsPerSecond": 10000,
+                  "X": 0, "Y": 0, "Z": -1,
+                  "HorizontalFOV": 360,
+                  "VerticalFOV": 30
+              }
+          }
+      }
+  },
+  "ControlMode": "Keyboard"
+}
