@@ -1,4 +1,4 @@
-# Cinematic Drone Navigation with AirSim
+# Autonommous Drone Navigation with AirSim inside Unreal Engine
 
 A dynamic drone navigation system that creates cinematic spiral flight patterns while incorporating real-time obstacle avoidance using LIDAR data using AirSim simulation inside Unreal Engine environment.
 
