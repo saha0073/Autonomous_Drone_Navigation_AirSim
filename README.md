@@ -40,7 +40,7 @@ This project implements an autonomous drone control system that generates smooth
      ```
 
 3. Installing the Python Client
-   * Download the [PythonClient folder](https://github.com/CodexLabsLLC/Colosseum/tree/main/PythonClient)
+   * Download the [PythonClient folder](https://github.com/CodexLabsLLC/Colosseum/tree/main/PythonClient) (We use Colosseum pythonclient instead of Microsoft AirSim python plugin for UE5 compatibility)
    * Navigate to the downloaded folder and run:
      ```bash
      python setup.py install
