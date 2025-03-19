@@ -3,7 +3,8 @@
 A dynamic drone navigation system that creates cinematic spiral flight patterns while incorporating real-time obstacle avoidance using LIDAR data in AirSim simulation environment.
 
 ## Demo
-[![Drone Navigation Demo](https://img.youtube.com/vi/Szfl03-d1VI/0.jpg)](https://youtu.be/Szfl03-d1VI)
+[![Watch the Demo on YouTube](https://img.youtube.com/vi/Szfl03-d1VI/0.jpg)](https://youtu.be/Szfl03-d1VI) 
+▶️ *Click to watch the demo video on YouTube*
 
 This project implements an autonomous drone control system that generates smooth, cinematic flight paths while maintaining safety through obstacle detection. The drone follows a descending spiral pattern while dynamically adjusting its trajectory based on LIDAR sensor data.
 
