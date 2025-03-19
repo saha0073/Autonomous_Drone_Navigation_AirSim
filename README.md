@@ -1,6 +1,6 @@
 # Cinematic Drone Navigation with AirSim
 
-A dynamic drone navigation system that creates cinematic spiral flight patterns while incorporating real-time obstacle avoidance using LIDAR data in AirSim simulation environment.
+A dynamic drone navigation system that creates cinematic spiral flight patterns while incorporating real-time obstacle avoidance using LIDAR data using AirSim simulation inside Unreal Engine environment.
 
 ## Demo
 [![Watch the Demo on YouTube](https://img.youtube.com/vi/Szfl03-d1VI/0.jpg)](https://youtu.be/Szfl03-d1VI) 
@@ -14,7 +14,6 @@ This project implements an autonomous drone control system that generates smooth
 * Real-time LIDAR-based obstacle detection and avoidance
 * Smooth trajectory adjustments
 * Configurable flight parameters
-* Custom camera positioning for cinematic captures
 
 ## Technical Stack
 * Simulation Environment: Unreal Engine 5 with Colosseum AirSim plugin
@@ -46,30 +45,27 @@ This project implements an autonomous drone control system that generates smooth
      ```bash
      python setup.py install
      ```
-   This will install all necessary dependencies in your conda environment.
+   This will install all necessary airsim dependencies in your conda environment.
 
 4. AirSim Settings Configuration
    * Copy `AiClient/settings.json` to `C:\Users\<username>\OneDrive\Documents\AirSim\`
-   * This configuration file is essential for drone setup and sensor configurations
+   * This configuration file will be used for drone setup and sensor configurations
 
 ### Running the Project
 1. Start the project from the UE5 editor (ASSETSVILLE demonstration map)
-2. Run the Python script:
+2. Run the Python aiclient script:
    ```bash
    python drone_navigation.py
    ```
-3. The drone will:
-   - Take off to initial height
-   - Execute a rotating spiral pattern
-   - Land automatically after completing the sequence
+3. The drone should take off, move, and finally land.
 
-### Optional: Building the Plugin from Source
+### Optional: Compiling the Plugin from Source
 If you prefer to build the plugin yourself instead of using the pre-built version:
 1. Clone the Colosseum repository: `git clone https://github.com/CodexLabsLLC/Colosseum`
 2. Initialize submodules: `git submodule update --recursive --init`
-3. Run `build.cmd` from Visual Studio terminal
-4. Navigate to `unreal/environments/Blockv2`
-5. Copy the Blockv2 folder to your desired location
+3. Run `build.cmd` from Visual Studio terminal going inside the folder and it should compile the plugin.
+4. Navigate to `Unreal/Environments/BlocksV2`
+5. Copy and bring out the BlocksV2 folder to your desired location
 6. Open this UE project
 
 ## Flight Behavior
