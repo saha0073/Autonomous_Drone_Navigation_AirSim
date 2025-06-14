@@ -48,6 +48,16 @@ The single drone system (`single_drone_navigation.py`) implements a cinematic sp
    * Automatic height adjustment
    * Collision avoidance
 
+4. **Flight Behavior**:
+   * Initial takeoff to -3 meters height
+   * Descending spiral pattern with dynamic radius
+   * Continuous LIDAR scanning for obstacles
+   * Automatic height adjustment when obstacles detected
+   * Smooth landing sequence
+   * Total flight duration: 30 seconds
+   * Angular speed: 0.5 radians per second
+   * Height increment: 0.03 meters per step
+
 ### Swarm Navigation
 The swarm system (`multi_drones_swarm.py`) implements coordinated movement of multiple drones:
 
@@ -89,6 +99,17 @@ The swarm system (`multi_drones_swarm.py`) implements coordinated movement of mu
    * Wind resistance modeling
    * Drone interaction zones
    * Energy efficiency in formation
+
+6. **Flight Behavior**:
+   * Synchronized takeoff of all drones
+   * Dynamic formation transitions every 2π radians
+   * Continuous formation maintenance
+   * Real-time obstacle avoidance
+   * Coordinated landing sequence
+   * Total flight duration: 30 seconds
+   * Formation radius: 5 meters
+   * Angular speed: 0.5 radians per second
+   * Safety distance: 2 meters between drones
 
 ## Getting Started
 
@@ -146,78 +167,33 @@ If you prefer to build the plugin yourself instead of using the pre-built versio
 5. Copy and bring out the BlocksV2 folder to your desired location
 6. Open this UE project
 
-## Flight Behavior
-The drone performs the following sequence:
-1. Takes off to initial height
-2. Executes a descending spiral pattern
-3. Continuously monitors for obstacles using LIDAR
-4. Adjusts height when obstacles are detected
-5. Lands safely after completing the flight duration
-
 ## Future Enhancements
 
-### Visual Odometry Integration
-1. **Feature Detection Improvements**:
-   * Implement ORB-SLAM3 for more robust feature tracking
-   * Add loop closure detection for drift correction
-   * Enhance feature matching with deep learning models
-   * Implement real-time feature tracking optimization
+1. **Visual Odometry Integration**
+   * Implement ORB-SLAM3 for improved feature detection and tracking
+   * Add sensor fusion between LIDAR and visual odometry data
 
-2. **Sensor Fusion**:
-   * Combine LIDAR and visual odometry data
-   * Use LIDAR for short-range precision (0-5m)
-   * Use visual odometry for long-range navigation (5m+)
-   * Implement Kalman filtering for sensor fusion
+2. **Swarm Intelligence**
+   * Implement distributed visual odometry for swarm coordination
+   * Add collaborative feature detection between drones
 
-3. **Use Case Optimization**:
-   * **LIDAR Preferred When**:
-     * High-precision short-range measurements needed
-     * Operating in low-light conditions
-     * Real-time obstacle avoidance required
-     * Maintaining precise formation distances
-     * Operating in featureless environments
+3. **Performance Optimization**
+   * GPU acceleration for visual odometry processing
+   * Parallel processing for real-time feature matching
 
-   * **Visual Odometry Preferred When**:
-     * Long-range navigation required
-     * Rich visual features available
-     * Energy efficiency is critical
-     * Global positioning needed
-     * Cross-drone recognition required
+4. **Reliability Improvements**
+   * Robust failure detection and automatic sensor switching
+   * Enhanced error recovery mechanisms
 
-4. **Swarm Intelligence**:
-   * Implement distributed visual odometry
-   * Share feature maps between drones
-   * Collaborative loop closure detection
-   * Cross-drone feature matching
-   * Swarm-wide pose graph optimization
-
-5. **Performance Optimization**:
-   * GPU-accelerated feature detection
-   * Parallel processing for multiple drones
-   * Efficient feature matching algorithms
-   * Real-time pose estimation
-   * Memory-efficient map representation
-
-6. **Reliability Improvements**:
-   * Robust failure detection
-   * Automatic sensor switching
-   * Degraded mode operation
-   * Recovery from tracking loss
-   * Backup navigation strategies
-
-7. **Energy Efficiency**:
-   * Adaptive sensor usage based on conditions
-   * Dynamic feature detection density
-   * Power-aware processing
-   * Sleep mode for inactive sensors
-   * Energy-efficient formation patterns
-
-8. **Formation Control**:
+5. **Formation Control**
    * Visual-based formation maintenance
-   * Cross-drone visual tracking
-   * Dynamic formation adaptation
-   * Collision-free path planning
-   * Formation reconfiguration
+   * Dynamic formation adaptation based on environment
+
+The current visual odometry implementation (`visual_odometry.py`) provides:
+* ORB feature detection and matching
+* Real-time position estimation
+* Multi-drone coordination support
+* Thread-safe updates for swarm operations
 
 These enhancements aim to create a robust, efficient, and intelligent drone navigation system that can adapt to various environmental conditions and operational requirements.
 
