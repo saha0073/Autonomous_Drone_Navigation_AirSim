@@ -53,6 +53,40 @@
                 "VerticalFOV": 30
             }
         }
+      },
+      "Drone4": {
+        "VehicleType": "SimpleFlight",
+        "X": 0, "Y": 2, "Z": 0,
+        "Yaw": 0,
+        "Sensors": {
+            "Lidar1": {
+                "SensorType": 6,
+                "Enabled": true,
+                "NumberOfChannels": 16,
+                "Range": 10,
+                "PointsPerSecond": 10000,
+                "X": 0, "Y": 0, "Z": -1,
+                "HorizontalFOV": 360,
+                "VerticalFOV": 30
+            }
+        }
+      },
+      "Drone5": {
+        "VehicleType": "SimpleFlight",
+        "X": 0, "Y": -2, "Z": 0,
+        "Yaw": 0,
+        "Sensors": {
+            "Lidar1": {
+                "SensorType": 6,
+                "Enabled": true,
+                "NumberOfChannels": 16,
+                "Range": 10,
+                "PointsPerSecond": 10000,
+                "X": 0, "Y": 0, "Z": -1,
+                "HorizontalFOV": 360,
+                "VerticalFOV": 30
+            }
+        }
       }
     }
   }

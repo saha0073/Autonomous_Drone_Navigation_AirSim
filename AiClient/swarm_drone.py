@@ -21,6 +21,8 @@ class SwarmController:
         self.safety_distance = 2.0  # Minimum distance between drones
         self.formation_radius = 5.0
         self.swarm_center = (0, 0, -3)
+        self.formation_type = "circle"  # Can be "circle", "spiral", "wave", "diamond"
+        self.formation_phase = 0
         print(f"\nInitializing Swarm Controller with drones: {drone_names}")
         
     def update_drone_states(self):
@@ -79,12 +81,44 @@ class SwarmController:
         """Calculate positions for each drone in the formation"""
         positions = {}
         print(f"\nCalculating formation positions (angle: {angle:.2f}):")
+        
+        # Change formation type periodically
+        if int(angle / (2 * math.pi)) > self.formation_phase:
+            self.formation_phase = int(angle / (2 * math.pi))
+            formations = ["circle", "spiral", "wave", "diamond"]
+            self.formation_type = formations[self.formation_phase % len(formations)]
+            print(f"\nSwitching to {self.formation_type} formation!")
+        
         for i, drone_name in enumerate(self.drone_names):
-            # Calculate position in formation circle
-            offset_angle = angle + (2 * math.pi * i / len(self.drone_names))
-            x = center[0] + self.formation_radius * math.cos(offset_angle)
-            y = center[1] + self.formation_radius * math.sin(offset_angle)
-            z = center[2] + 0.5 * math.sin(angle)  # Add some vertical movement
+            if self.formation_type == "circle":
+                # Circular formation
+                offset_angle = angle + (2 * math.pi * i / len(self.drone_names))
+                x = center[0] + self.formation_radius * math.cos(offset_angle)
+                y = center[1] + self.formation_radius * math.sin(offset_angle)
+                z = center[2] + 0.5 * math.sin(angle)
+                
+            elif self.formation_type == "spiral":
+                # Spiral formation
+                spiral_angle = angle + (2 * math.pi * i / len(self.drone_names))
+                radius = self.formation_radius * (1 + 0.2 * math.sin(angle))
+                x = center[0] + radius * math.cos(spiral_angle)
+                y = center[1] + radius * math.sin(spiral_angle)
+                z = center[2] + 1.0 * math.sin(spiral_angle)
+                
+            elif self.formation_type == "wave":
+                # Wave formation
+                wave_angle = angle + (2 * math.pi * i / len(self.drone_names))
+                x = center[0] + self.formation_radius * math.cos(wave_angle)
+                y = center[1] + self.formation_radius * math.sin(wave_angle)
+                z = center[2] + 2.0 * math.sin(wave_angle + i)
+                
+            else:  # diamond formation
+                # Diamond formation
+                diamond_angle = angle + (2 * math.pi * i / len(self.drone_names))
+                radius = self.formation_radius * (1 + 0.5 * math.sin(diamond_angle))
+                x = center[0] + radius * math.cos(diamond_angle)
+                y = center[1] + radius * math.sin(diamond_angle)
+                z = center[2] + 1.0 * math.cos(diamond_angle)
             
             # Check for obstacles and adjust if necessary
             if self.drone_states[drone_name].obstacles:
@@ -141,7 +175,7 @@ def main():
     print("Connected to AirSim!")
     
     # Initialize drones
-    drone_names = ["Drone1", "Drone2", "Drone3"]
+    drone_names = ["Drone1", "Drone2", "Drone3", "Drone4", "Drone5"]
     
     print("\nEnabling API control and arming drones...")
     # Enable API control and arm drones
