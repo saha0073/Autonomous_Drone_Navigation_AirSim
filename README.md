@@ -1,17 +1,17 @@
 # Autonommous Drone Navigation with AirSim inside Unreal Engine
 
-A dynamic drone navigation system that creates cinematic spiral flight patterns while incorporating real-time obstacle avoidance using LIDAR data using AirSim simulation inside Unreal Engine environment.
+A dynamic drone navigation system that creates cinematic flight patterns while incorporating real-time obstacle avoidance using LIDAR data. The system supports both individual drone navigation with spiral patterns and coordinated swarm movements with multiple drones, all implemented using AirSim simulation inside Unreal Engine environment.
 
 ## Demo
 [![Watch the Spiral Pattern Demo](https://i.ytimg.com/vi/Szfl03-d1VI/mqdefault.jpg)](https://www.youtube.com/watch?v=Szfl03-d1VI) 
 
-▶️ *Click the thumbnails above to watch the demo videos on YouTube*
+▶️ *Click the image above to watch the single drone spiral pattern navigation demo*
 
 [![Watch the Swarm Demo](https://i.ytimg.com/vi/z0FzZgCPRPk/mqdefault.jpg)](https://www.youtube.com/watch?v=z0FzZgCPRPk)
 
-▶️ *Click the thumbnails above to watch the demo videos on YouTube*
+▶️ *Click the image above to watch the multi-drone swarm coordination demo*
 
-This project implements an autonomous drone control system that generates smooth, cinematic flight paths while maintaining safety through obstacle detection. The system supports both individual drone navigation with spiral patterns and coordinated swarm movements with multiple drones.
+This project implements an autonomous drone control system that generates smooth, cinematic flight paths while maintaining safety through obstacle detection.
 
 ## Features
 * Autonomous spiral flight pattern generation
