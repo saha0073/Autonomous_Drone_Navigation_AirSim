@@ -7,7 +7,7 @@ A dynamic drone navigation system that creates cinematic flight patterns while i
 
 ▶️ *Click the image above to watch the single drone spiral pattern navigation demo*
 
-[![Watch the Swarm Demo](https://i.ytimg.com/vi/z0FzZgCPRPk/mqdefault.jpg)](https://www.youtube.com/watch?v=z0FzZgCPRPk)
+[![Watch the Swarm Demo](swarm_drones_formation.png)](https://www.youtube.com/watch?v=z0FzZgCPRPk)
 
 ▶️ *Click the image above to watch the multi-drone swarm coordination demo*
 
