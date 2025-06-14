@@ -3,8 +3,29 @@
 A dynamic drone navigation system that creates cinematic spiral flight patterns while incorporating real-time obstacle avoidance using LIDAR data using AirSim simulation inside Unreal Engine environment.
 
 ## Demo
-[![Watch the Spiral Pattern Demo](https://img.youtube.com/vi/Szfl03-d1VI/0.jpg)](https://youtu.be/Szfl03-d1VI) 
-[![Watch the Swarm Demo](https://img.youtube.com/vi/z0FzZgCPRPk/0.jpg)](https://youtu.be/z0FzZgCPRPk)
+<div style="position: relative; display: inline-block; margin: 10px;">
+  <a href="https://youtu.be/Szfl03-d1VI">
+    <img src="https://img.youtube.com/vi/Szfl03-d1VI/0.jpg" alt="Spiral Pattern Demo" style="width: 100%; max-width: 480px;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      <svg width="68" height="48" viewBox="0 0 68 48">
+        <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 c5.31,1.42,27.1,1.42,27.1,1.42s21.79,0,27.1-1.42c2.93-0.78,4.64-2.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
+        <path d="M 45,24 27,14 27,34" fill="#ffffff"/>
+      </svg>
+    </div>
+  </a>
+</div>
+
+<div style="position: relative; display: inline-block; margin: 10px;">
+  <a href="https://youtu.be/z0FzZgCPRPk">
+    <img src="https://img.youtube.com/vi/z0FzZgCPRPk/0.jpg" alt="Swarm Demo" style="width: 100%; max-width: 480px;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+      <svg width="68" height="48" viewBox="0 0 68 48">
+        <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 c5.31,1.42,27.1,1.42,27.1,1.42s21.79,0,27.1-1.42c2.93-0.78,4.64-2.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"/>
+        <path d="M 45,24 27,14 27,34" fill="#ffffff"/>
+      </svg>
+    </div>
+  </a>
+</div>
 
 ▶️ *Click to watch the demo videos on YouTube*
 
