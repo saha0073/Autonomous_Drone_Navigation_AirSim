@@ -1,11 +1,14 @@
 {
-    "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/main/docs/settings.md",
+    "SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/master/docs/settings.md",
     "SettingsVersion": 1.2,
     "SimMode": "Multirotor",
+    "ClockSpeed": 1.0,
     "Vehicles": {
       "Drone1": {
         "VehicleType": "SimpleFlight",
-        "X": 0, "Y": 0, "Z": 0,
+        "X": 0,
+        "Y": 0,
+        "Z": -2,
         "Yaw": 0,
         "Sensors": {
             "Lidar1": {
@@ -22,7 +25,9 @@
       },
       "Drone2": {
         "VehicleType": "SimpleFlight",
-        "X": 2, "Y": 0, "Z": 0,
+        "X": 2,
+        "Y": 0,
+        "Z": -1.5,
         "Yaw": 0,
         "Sensors": {
             "Lidar1": {
@@ -39,7 +44,9 @@
       },
       "Drone3": {
         "VehicleType": "SimpleFlight",
-        "X": -2, "Y": 0, "Z": 0,
+        "X": 1,
+        "Y": 1.732,
+        "Z": -2.5,
         "Yaw": 0,
         "Sensors": {
             "Lidar1": {
@@ -56,7 +63,9 @@
       },
       "Drone4": {
         "VehicleType": "SimpleFlight",
-        "X": 0, "Y": 2, "Z": 0,
+        "X": -1,
+        "Y": 1.732,
+        "Z": -1.8,
         "Yaw": 0,
         "Sensors": {
             "Lidar1": {
@@ -73,7 +82,28 @@
       },
       "Drone5": {
         "VehicleType": "SimpleFlight",
-        "X": 0, "Y": -2, "Z": 0,
+        "X": -2,
+        "Y": 0,
+        "Z": -2.2,
+        "Yaw": 0,
+        "Sensors": {
+            "Lidar1": {
+                "SensorType": 6,
+                "Enabled": true,
+                "NumberOfChannels": 16,
+                "Range": 10,
+                "PointsPerSecond": 10000,
+                "X": 0, "Y": 0, "Z": -1,
+                "HorizontalFOV": 360,
+                "VerticalFOV": 30
+            }
+        }
+      },
+      "Drone6": {
+        "VehicleType": "SimpleFlight",
+        "X": -1,
+        "Y": -1.732,
+        "Z": -1.7,
         "Yaw": 0,
         "Sensors": {
             "Lidar1": {
@@ -88,5 +118,26 @@
             }
         }
       }
+    },
+    "Sensors": {
+        "LidarSensor1": {
+            "SensorType": 6,
+            "Enabled": true,
+            "NumberOfChannels": 16,
+            "RotationsPerSecond": 10,
+            "PointsPerSecond": 100000,
+            "X": 0,
+            "Y": 0,
+            "Z": -1,
+            "Roll": 0,
+            "Pitch": 0,
+            "Yaw": 0,
+            "Range": 20,
+            "VerticalFOVUpper": 10,
+            "VerticalFOVLower": -10,
+            "HorizontalFOVStart": -180,
+            "HorizontalFOVEnd": 180,
+            "DrawDebugPoints": true
+        }
     }
   }

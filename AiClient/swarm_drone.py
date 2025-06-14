@@ -5,6 +5,7 @@ import numpy as np
 import sys
 from dataclasses import dataclass
 from typing import List, Dict, Tuple
+from concurrent.futures import ThreadPoolExecutor
 
 @dataclass
 class DroneState:
@@ -18,11 +19,12 @@ class SwarmController:
         self.client = client
         self.drone_names = drone_names
         self.drone_states: Dict[str, DroneState] = {}
-        self.safety_distance = 2.0  # Minimum distance between drones
+        self.safety_distance = 2.0
         self.formation_radius = 5.0
         self.swarm_center = (0, 0, -3)
-        self.formation_type = "circle"  # Can be "circle", "spiral", "wave", "diamond"
+        self.formation_type = "circle"
         self.formation_phase = 0
+        self.executor = ThreadPoolExecutor(max_workers=len(drone_names))
         print(f"\nInitializing Swarm Controller with drones: {drone_names}")
         
     def update_drone_states(self):
@@ -34,7 +36,6 @@ class SwarmController:
                 pos = state.kinematics_estimated.position
                 vel = state.kinematics_estimated.linear_velocity
                 
-                # Get LIDAR data for obstacle detection
                 lidar_data = self.client.getLidarData(lidar_name="Lidar1", vehicle_name=drone_name)
                 obstacles = []
                 if lidar_data.point_cloud:
@@ -44,7 +45,7 @@ class SwarmController:
                 self.drone_states[drone_name] = DroneState(
                     position=(pos.x_val, pos.y_val, pos.z_val),
                     velocity=(vel.x_val, vel.y_val, vel.z_val),
-                    battery=100.0,  # Placeholder for battery level
+                    battery=100.0,
                     obstacles=obstacles
                 )
                 
@@ -55,6 +56,20 @@ class SwarmController:
                 
             except Exception as e:
                 print(f"Error updating state for {drone_name}: {str(e)}")
+    
+    def move_drone_async(self, drone_name: str, target_pos: Tuple[float, float, float]):
+        """Move a single drone to its target position asynchronously"""
+        try:
+            if not self.check_collision_risk(drone_name, target_pos):
+                print(f"  Moving {drone_name} to: x={target_pos[0]:.2f}, y={target_pos[1]:.2f}, z={target_pos[2]:.2f}")
+                self.client.moveToPositionAsync(
+                    target_pos[0], target_pos[1], target_pos[2],
+                    2.0, vehicle_name=drone_name
+                )
+            else:
+                print(f"  {drone_name}: Movement skipped due to collision risk")
+        except Exception as e:
+            print(f"Error moving {drone_name}: {str(e)}")
     
     def check_collision_risk(self, drone_name: str, target_pos: Tuple[float, float, float]) -> bool:
         """Check if moving to target position would cause collision with other drones"""
@@ -85,45 +100,61 @@ class SwarmController:
         # Change formation type periodically
         if int(angle / (2 * math.pi)) > self.formation_phase:
             self.formation_phase = int(angle / (2 * math.pi))
-            formations = ["circle", "spiral", "wave", "diamond"]
+            formations = ["circle", "spiral", "wave", "diamond", "hexagon", "cross"]
             self.formation_type = formations[self.formation_phase % len(formations)]
             print(f"\nSwitching to {self.formation_type} formation!")
         
         for i, drone_name in enumerate(self.drone_names):
             if self.formation_type == "circle":
-                # Circular formation
+                # Circular formation with synchronized vertical movement
                 offset_angle = angle + (2 * math.pi * i / len(self.drone_names))
                 x = center[0] + self.formation_radius * math.cos(offset_angle)
                 y = center[1] + self.formation_radius * math.sin(offset_angle)
-                z = center[2] + 0.5 * math.sin(angle)
+                z = center[2] + 1.0 * math.sin(angle + i)
                 
             elif self.formation_type == "spiral":
-                # Spiral formation
+                # Dynamic spiral formation
                 spiral_angle = angle + (2 * math.pi * i / len(self.drone_names))
-                radius = self.formation_radius * (1 + 0.2 * math.sin(angle))
+                radius = self.formation_radius * (1 + 0.3 * math.sin(angle + i))
                 x = center[0] + radius * math.cos(spiral_angle)
                 y = center[1] + radius * math.sin(spiral_angle)
-                z = center[2] + 1.0 * math.sin(spiral_angle)
+                z = center[2] + 1.5 * math.sin(spiral_angle)
                 
             elif self.formation_type == "wave":
-                # Wave formation
+                # Complex wave pattern
                 wave_angle = angle + (2 * math.pi * i / len(self.drone_names))
                 x = center[0] + self.formation_radius * math.cos(wave_angle)
                 y = center[1] + self.formation_radius * math.sin(wave_angle)
-                z = center[2] + 2.0 * math.sin(wave_angle + i)
+                z = center[2] + 2.0 * math.sin(wave_angle * 2 + i)
                 
-            else:  # diamond formation
-                # Diamond formation
+            elif self.formation_type == "diamond":
+                # Diamond formation with dynamic scaling
                 diamond_angle = angle + (2 * math.pi * i / len(self.drone_names))
                 radius = self.formation_radius * (1 + 0.5 * math.sin(diamond_angle))
                 x = center[0] + radius * math.cos(diamond_angle)
                 y = center[1] + radius * math.sin(diamond_angle)
                 z = center[2] + 1.0 * math.cos(diamond_angle)
+                
+            elif self.formation_type == "hexagon":
+                # Hexagonal formation with rotation
+                hex_angle = angle + (2 * math.pi * i / len(self.drone_names))
+                radius = self.formation_radius * (1 + 0.2 * math.sin(angle))
+                x = center[0] + radius * math.cos(hex_angle)
+                y = center[1] + radius * math.sin(hex_angle)
+                z = center[2] + 1.0 * math.sin(hex_angle)
+                
+            else:  # cross formation
+                # Cross formation with dynamic movement
+                cross_angle = angle + (2 * math.pi * i / len(self.drone_names))
+                radius = self.formation_radius * (1 + 0.3 * math.cos(cross_angle))
+                x = center[0] + radius * math.cos(cross_angle)
+                y = center[1] + radius * math.sin(cross_angle)
+                z = center[2] + 1.0 * math.sin(cross_angle * 2)
             
             # Check for obstacles and adjust if necessary
             if self.drone_states[drone_name].obstacles:
                 print(f"  {drone_name}: Obstacles detected, adjusting height")
-                z += 0.5  # Rise above obstacles
+                z += 0.5
             
             positions[drone_name] = (x, y, z)
             print(f"  {drone_name} target: x={x:.2f}, y={y:.2f}, z={z:.2f}")
@@ -148,34 +179,36 @@ class SwarmController:
                 angle = angular_speed * elapsed
                 target_positions = self.calculate_formation_positions(self.swarm_center, angle)
                 
-                # Move each drone to its target position
+                # Move all drones simultaneously
                 print("\nExecuting movement commands:")
+                futures = []
                 for drone_name, target_pos in target_positions.items():
-                    if not self.check_collision_risk(drone_name, target_pos):
-                        print(f"  Moving {drone_name} to: x={target_pos[0]:.2f}, y={target_pos[1]:.2f}, z={target_pos[2]:.2f}")
-                        self.client.moveToPositionAsync(
-                            target_pos[0], target_pos[1], target_pos[2],
-                            2.0, vehicle_name=drone_name
-                        ).join()
-                    else:
-                        print(f"  {drone_name}: Movement skipped due to collision risk")
+                    future = self.executor.submit(self.move_drone_async, drone_name, target_pos)
+                    futures.append(future)
+                
+                # Wait for all movements to complete
+                for future in futures:
+                    future.result()
                 
                 time.sleep(0.1)
                 
             except Exception as e:
                 print(f"\nError during swarm movement: {str(e)}")
                 print("Attempting to continue...")
-                time.sleep(1)  # Wait a bit before retrying
+                time.sleep(1)
+    
+    def __del__(self):
+        """Cleanup thread pool"""
+        self.executor.shutdown()
 
 def main():
     print("\nInitializing AirSim connection...")
-    # Connect to AirSim
     client = airsim.MultirotorClient()
     client.confirmConnection()
     print("Connected to AirSim!")
     
     # Initialize drones
-    drone_names = ["Drone1", "Drone2", "Drone3", "Drone4", "Drone5"]
+    drone_names = ["Drone1", "Drone2", "Drone3", "Drone4", "Drone5", "Drone6"]
     
     print("\nEnabling API control and arming drones...")
     # Enable API control and arm drones
