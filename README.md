@@ -3,11 +3,16 @@
 A dynamic drone navigation system that creates cinematic flight patterns while incorporating real-time obstacle avoidance using LIDAR data. The system supports both individual drone navigation with spiral patterns and coordinated swarm movements with multiple drones, all implemented using AirSim simulation inside Unreal Engine environment.
 
 ## Demo
-[![Watch the Spiral Pattern Demo](https://i.ytimg.com/vi/Szfl03-d1VI/mqdefault.jpg)](https://www.youtube.com/watch?v=Szfl03-d1VI) 
+
+<a href="https://www.youtube.com/watch?v=Szfl03-d1VI">
+  <img src="https://i.ytimg.com/vi/Szfl03-d1VI/mqdefault.jpg" alt="Watch the Spiral Pattern Demo" width="400"/>
+</a>
 
 ▶️ *Click the image above to watch the single drone spiral pattern navigation demo*
 
-[![Watch the Swarm Demo](Recordings/swarm_drones_formation.png)](https://www.youtube.com/watch?v=z0FzZgCPRPk)
+<a href="https://www.youtube.com/watch?v=z0FzZgCPRPk">
+  <img src="Recordings/swarm_drones_formation.png" alt="Watch the Swarm Demo" width="400"/>
+</a>
 
 ▶️ *Click the image above to watch the multi-drone swarm coordination demo*
 
