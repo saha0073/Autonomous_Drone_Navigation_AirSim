@@ -102,13 +102,7 @@ The swarm system (`multi_drones_swarm.py`) implements coordinated movement of mu
    * Real-time collision risk assessment
    * Emergency maneuver capability
 
-5. **Physics Considerations**:
-   * Aerodynamic effects in formation
-   * Wind resistance modeling
-   * Drone interaction zones
-   * Energy efficiency in formation
-
-6. **Flight Behavior**:
+5. **Flight Behavior**:
    * Synchronized takeoff of all drones
    * Dynamic formation transitions every 2π radians
    * Continuous formation maintenance
